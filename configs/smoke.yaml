@@ -1,0 +1,41 @@
+paper:
+  slug: an-input-level-privacy-pipeline-for-federated-face
+  title: "An Input-Level Privacy Pipeline for Federated Face Recognition"
+data:
+  celeba_root: ../../datasets/celeba/extracted/celeba
+  lfw_root: ../../datasets/lfw
+  root: ../../datasets/celeba/extracted/celeba
+  train_ratio: 0.7
+  max_images: 1024
+model:
+  image_size: 112
+  embed_dim: 512
+  pretrained_backbone: true
+privacy:
+  n_cutmix: 2
+  grid_g: 4
+  n_keys: 4
+  apply_perm: true
+  invert_for_train: true
+train:
+  protocol: smoke
+  seed: 42
+  num_workers: 2
+  batch_size: 32
+  n_clients: 2
+  local_epochs: 1
+  rounds: 2
+  optimizer: sgd
+  lr: 0.05
+  momentum: 0.9
+  weight_decay: 0.0005
+eval:
+  batch_size: 64
+  max_lfw_pairs: 200
+  mia_max: 256
+paths:
+  checkpoint_dir: outputs/checkpoints/smoke
+  log_dir: outputs/logs/smoke
+  pred_dir: outputs/predictions/smoke
+  figure_dir: outputs/figures/smoke
+device: cuda
